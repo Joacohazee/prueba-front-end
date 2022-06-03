@@ -10,10 +10,10 @@ import IconButton from '@mui/material/IconButton';
 export default function ButtonAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" color="primary">
+      <AppBar position="relative" color="primary">
         <Toolbar>
           <Typography variant="h6">
-            JoacoWeb
+            Test front-end
           </Typography>
         </Toolbar>
       </AppBar>
