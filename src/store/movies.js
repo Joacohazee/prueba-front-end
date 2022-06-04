@@ -13,11 +13,6 @@ export const getMovies = createAsyncThunk(
   moviesServices.getMoviesServices
 );
 
-export const getAllMovies = createAsyncThunk(
-  "GET_ALL_MOVIES",
-  moviesServices.getAllMoviesServices
-);
-
 const moviesSlice = createSlice({
   name: "movies",
   initialState: moviesInitialState,
@@ -31,16 +26,6 @@ const moviesSlice = createSlice({
       state.loading = false;
     },
     [getMovies.rejected]: (state, action) => {
-      state.error = action.error.message;
-    },
-    [getAllMovies.pending]: (state) => {
-      state.loading = true;
-    },
-    [getAllMovies.fulfilled]: (state, action) => {
-      state.fact = (state.fact).concat((action.payload))
-      state.loading = false;
-    },
-    [getAllMovies.rejected]: (state, action) => {
       state.error = action.error.message;
     },
   },

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "../styles/home.css"
 // import InfiniteScroll from "react-infinite-scroll-component";
 import Cards from "../commons/Card";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,22 +10,16 @@ import { Grid } from "@mui/material";
 const Home = () => {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies.fact);
+  const lang = useSelector((state) => state.languages.lang);
 
   useEffect(() => {
-    dispatch(getMovies())
+    dispatch(getMovies(lang))
+  }, [lang]);
 
-  }, []);
-
-  console.log("Data ===>", movies);
+  // console.log("Data ===>", movies);
 
   return (
-    <div>
-      <Button variant="contained" color="primary">
-        BUTTON
-      </Button>
-      <Button variant="contained" color="secondary">
-        BUTTON
-      </Button>
+    <body>
       <Grid
         container
         spacing={2}
@@ -33,11 +28,11 @@ const Home = () => {
       >
         { movies? (movies).map((movie, i) => (
           <Grid item key={i}>
-            <Cards data={movie} />
+            <Cards data={movie} language={lang} />
           </Grid>
         )) : <></>}
       </Grid>
-    </div>
+    </body>
   );
 };
 
