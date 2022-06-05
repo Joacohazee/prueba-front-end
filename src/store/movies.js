@@ -5,7 +5,7 @@ const moviesInitialState = {
   loading: false,
   fact: [],
   data: [],
-  error: "",
+  error: null,
 };
 
 export const getMovies = createAsyncThunk(
