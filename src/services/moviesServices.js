@@ -4,13 +4,14 @@ let apiDirection;
 
 const failedProbability = () => {
   let randomNum = Math.floor(Math.random() * 100);
-  randomNum < 15 ?
-  apiDirection = 'otherDirection' :
-  apiDirection = "https://api.themoviedb.org/3/movie/top_rated?api_key=d023cfe53943d6e26b3d31eb89dad6e6&language=";
-  console.log('RANDOMnUM===> ',randomNum)
+  randomNum < 15
+    ? (apiDirection = "otherDirection")
+    : (apiDirection =
+        "https://api.themoviedb.org/3/movie/top_rated?api_key=d023cfe53943d6e26b3d31eb89dad6e6&language=");
+  console.log("RANDOMnUM===> ", randomNum);
 };
 
-failedProbability()
+failedProbability();
 
 export const getMoviesServices = async (lang) => {
   console.log("languages===> ", `${apiDirection}${lang}&page=1`);
@@ -26,6 +27,12 @@ export const getMoviesServices = async (lang) => {
     .concat(movie4["data"]["results"])
     .concat(movie5["data"]["results"]);
 
-  // console.log("res Axios ===>", movies);
   return movies;
 };
+
+export const factFilteredServices = (data) => {
+  const [ idiom, movies ] = data
+  const factFiltered = movies.filter( movie => movie['original_language'] === idiom)
+  // console.log('filterrrrrrr',factFiltered)
+  return factFiltered
+}

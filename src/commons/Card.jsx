@@ -11,8 +11,10 @@ import {
   Backdrop,
 } from "@mui/material";
 import SingleMovie from "./SingleMovie";
+import { useSelector } from "react-redux";
 
-const Cards = ({ data, language }) => {
+const Cards = ({ data }) => {
+  const isDark = useSelector(state => state.mode.isDark)
 
   const [open, setOpen] = React.useState(false);
     const handleClose = () => {
@@ -23,8 +25,8 @@ const Cards = ({ data, language }) => {
     };
 
   return (
-    <Box width="300px">
-      <Card>
+    <Box width="300px" >
+      <Card sx={{bgcolor: 'secondary.main'}}>
         <CardMedia
           component="img"
           height="194"
@@ -32,22 +34,21 @@ const Cards = ({ data, language }) => {
           alt="Movie image"
         />
         <CardContent>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" sx={{color: `${isDark ? 'white' : ''}`}}>
             {data.title}
           </Typography>
-          {/* <Typography variant="body2" color="text.secondary">
-            {data.overview}
-          </Typography> */}
         </CardContent>
         <CardActions>
-          <Button onClick={handleToggle} size="small">{language === 'en-US' ? 'Share' : 'mostrar'}</Button>
+          <Button sx={{color: `${isDark ? 'white' : ''}`}} onClick={handleToggle} size="small">
+            <Typography variant="body1" color="primary">share</Typography>
+          </Button>
           <div>
         <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
           open={open}
           onClick={handleClose}
         >
-          <SingleMovie  movie={data} />
+          <SingleMovie  movie={data} mode={isDark}/>
         </Backdrop>
       </div>
         </CardActions>
