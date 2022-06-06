@@ -1,17 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/home.css";
-// import InfiniteScroll from "react-infinite-scroll-component";
 import Cards from "../commons/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMovies, getMovies } from "../store/movies";
-import Button from "@mui/material/Button";
 import { Grid } from "@mui/material";
 import swal from "sweetalert";
 
-const Home = () => {
+const HomeByLang = ({movies}) => {
+    console.log('MOVIES===> ', movies)
   const dispatch = useDispatch();
   const isDark = useSelector(state => state.mode.isDark)
-  const movies = useSelector((state) => state.movies.fact);
   const errorText = useSelector((state) => state.movies.error);
 
   if (errorText)
@@ -23,8 +20,7 @@ const Home = () => {
     })
       .then(() =>
         swal({
-          // title: "Sorry",
-          text: "reload?",
+          text: "Reload page?",
           icon: "info",
           buttons: ['No', 'Yes'],
         })
@@ -32,10 +28,6 @@ const Home = () => {
       .then((answ) => {
         if (answ) window.location.reload();
       });
-
-  useEffect(() => {
-    dispatch(getMovies());
-  }, []);
 
   console.log("Data error ===>", errorText);
 
@@ -61,4 +53,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeByLang;
