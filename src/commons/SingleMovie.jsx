@@ -1,5 +1,5 @@
-import { Backdrop, Button, Card, CardContent, CardMedia, CircularProgress, Typography } from '@mui/material';
-import React, { useState } from 'react'
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import React from 'react'
 
 const SingleMovie = ({ movie, mode }) => {
   return (

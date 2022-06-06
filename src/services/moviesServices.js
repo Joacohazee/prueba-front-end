@@ -8,13 +8,11 @@ const failedProbability = () => {
     ? (apiDirection = "otherDirection")
     : (apiDirection =
         "https://api.themoviedb.org/3/movie/top_rated?api_key=d023cfe53943d6e26b3d31eb89dad6e6&language=");
-  console.log("RANDOMnUM===> ", randomNum);
 };
 
 failedProbability();
 
 export const getMoviesServices = async (lang) => {
-  console.log("languages===> ", `${apiDirection}${lang}&page=1`);
   const movie1 = await axios.get(`${apiDirection}${lang}&page=1`);
   const movie2 = await axios.get(`${apiDirection}${lang}&page=2`);
   const movie3 = await axios.get(`${apiDirection}${lang}&page=3`);
@@ -31,8 +29,9 @@ export const getMoviesServices = async (lang) => {
 };
 
 export const factFilteredServices = (data) => {
-  const [ idiom, movies ] = data
-  const factFiltered = movies.filter( movie => movie['original_language'] === idiom)
-  // console.log('filterrrrrrr',factFiltered)
-  return factFiltered
-}
+  const [idiom, movies] = data;
+  const factFiltered = movies.filter(
+    (movie) => movie["original_language"] === idiom
+  );
+  return factFiltered;
+};

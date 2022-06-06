@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
-import "../styles/home.css";
-// import InfiniteScroll from "react-infinite-scroll-component";
 import Cards from "../commons/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMovies, getMovies } from "../store/movies";
-import Button from "@mui/material/Button";
-import { Grid } from "@mui/material";
+import { getMovies } from "../store/movies";
+import { Box, Grid } from "@mui/material";
 import swal from "sweetalert";
+import LoadPage from "../commons/LoadPage";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const isDark = useSelector(state => state.mode.isDark)
+  const isDark = useSelector((state) => state.mode.isDark);
   const movies = useSelector((state) => state.movies.fact);
   const errorText = useSelector((state) => state.movies.error);
+  const isLoad = useSelector((state) => state.movies.loading);
 
   if (errorText)
     swal({
@@ -23,10 +22,9 @@ const Home = () => {
     })
       .then(() =>
         swal({
-          // title: "Sorry",
           text: "reload?",
           icon: "info",
-          buttons: ['No', 'Yes'],
+          buttons: ["No", "Yes"],
         })
       )
       .then((answ) => {
@@ -37,27 +35,30 @@ const Home = () => {
     dispatch(getMovies());
   }, []);
 
-  console.log("Data error ===>", errorText);
-
   return (
-    <body className={`${isDark ? 'dark' : 'light'}`}>
-      <Grid
-        container
-        spacing={2}
-        wrap="wrap"
-        sx={{ display: "flex", justifyContent: "center", marginTop: "1em" }}
-      >
-        {movies ? (
-          movies.map((movie, i) => (
-            <Grid item key={i}>
-              <Cards data={movie} />
-            </Grid>
-          ))
-        ) : (
-          <></>
-        )}
-      </Grid>
-    </body>
+
+    <Box sx={{bgcolor: 'tertiary.main', paddingTop: '3em', paddingBottom: '1em',}}>
+      {isLoad ? (
+        <LoadPage />
+      ) : (
+        <Grid
+          container
+          spacing={2}
+          wrap="wrap"
+          sx={{ display: "flex", justifyContent: "center", marginTop: "1em" }}
+        >
+          {movies ? (
+            movies.map((movie, i) => (
+              <Grid item key={i}>
+                <Cards data={movie} />
+              </Grid>
+            ))
+          ) : (
+            <></>
+          )}
+        </Grid>
+      )}
+    </Box>
   );
 };
 

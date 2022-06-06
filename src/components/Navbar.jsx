@@ -11,7 +11,7 @@ import { toggleMode } from "../store/themeMode";
 import FilterByLanguage from "../commons/FilterByLanguage";
 import { Link } from "react-router-dom";
 
-export default function ButtonAppBar() {
+const Navbar = () => {
   const dispatch = useDispatch();
   const isDark = useSelector((state) => state.mode.isDark);
 
@@ -23,16 +23,13 @@ export default function ButtonAppBar() {
     <Box sx={{ display: "flex" }}>
       <AppBar position="fixed" color="secondary">
         <Toolbar>
-          <Box></Box>
           <Box>
             <Button>
-              <Typography>
-                <Link to="" className="homeButton">
-                  <Typography variant="body1" color="primary">
-                    Inicio
-                  </Typography>
-                </Link>
-              </Typography>
+              <Link to="" className="homeButton">
+                <Typography variant="body1" color="primary">
+                  Home
+                </Typography>
+              </Link>
             </Button>
           </Box>
           <Box flexGrow={1}>
@@ -46,3 +43,5 @@ export default function ButtonAppBar() {
     </Box>
   );
 }
+
+export default Navbar

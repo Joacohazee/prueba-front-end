@@ -3,11 +3,9 @@ import {
   Button,
   Menu,
   MenuItem,
-  Checkbox,
-  FormControlLabel,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { factFiltered } from "../store/movies";
@@ -18,7 +16,6 @@ const FilterByLanguage = () => {
   const movieLang = useSelector((state) => state.movies.languages);
   const movies = useSelector((state) => state.movies.fact);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [langSelected, setLangSelected] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -30,12 +27,11 @@ const FilterByLanguage = () => {
   };
 
   const handleLangSelected = (idiom, movies) => {
-    //  console.log(idiom, movies)
     dispatch(factFiltered([idiom, movies]));
   };
 
   return (
-    <div>
+    <Fragment>
       <Button
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
@@ -69,7 +65,7 @@ const FilterByLanguage = () => {
           </Link>
         ))}
       </Menu>
-    </div>
+    </Fragment>
   );
 };
 
