@@ -1,28 +1,28 @@
 import "./styles/app.css";
 import Home from "./components/Home";
-import ButtonAppBar from "./components/Navbar";
-import { ThemeProvider } from "@mui/material";
-import * as themeConfig from './styles/themeConfig'
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import HomeByLang from "./components/HomeByOriginLang";
 import Footer from "./components/Footer";
+import * as themeConfig from "./styles/themeConfig";
+import { ThemeProvider } from "@mui/material";
+import { useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-
-  const isDark = useSelector(state => state.mode.isDark)
-  const filtered = useSelector(state => state.movies.factFiltered)
+  const isDark = useSelector((state) => state.mode.isDark);
+  const filtered = useSelector((state) => state.movies.factFiltered);
 
   return (
-    <ThemeProvider theme={themeConfig[`${isDark ? 'darkTheme' : 'theme'}`]}>
-      <ButtonAppBar />
+    <ThemeProvider theme={themeConfig[`${isDark ? "darkTheme" : "theme"}`]}>
+      <Navbar />
       <Routes>
-        <Route path="" element={<Home />}/>
-        <Route path="/OriginLanguage" element={<HomeByLang movies={filtered} />}/>
+        <Route path="" element={<Home />} />
+        <Route
+          path="/OriginLanguage"
+          element={<HomeByLang movies={filtered} />}
+        />
       </Routes>
-      <Footer/>
-      
+      <Footer />
     </ThemeProvider>
   );
 }

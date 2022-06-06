@@ -7,7 +7,6 @@ import {
   CardActions,
   Button,
   Box,
-  CircularProgress,
   Backdrop,
 } from "@mui/material";
 import SingleMovie from "./SingleMovie";
